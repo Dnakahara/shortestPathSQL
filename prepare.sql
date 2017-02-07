@@ -1,0 +1,48 @@
+USE practice;
+
+DROP TABLE IF EXISTS vertices;
+
+CREATE TABLE vertices
+(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cost INT DEFAULT NULL
+);
+
+DROP TABLE IF EXISTS edges;
+
+CREATE TABLE edges
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    src INT UNSIGNED NOT NULL,
+    dest INT UNSIGNED NOT NULL,
+    cost INT(3) NOT NULL,
+    INDEX SD_idx(src, dest),
+    PRIMARY KEY(id)
+);
+
+LOAD DATA LOCAL INFILE './GraphV.csv' 
+INTO TABLE vertices 
+FIELDS 
+    TERMINATED BY ',' 
+    OPTIONALLY ENCLOSED BY '"' 
+    ESCAPED BY ''
+LINES
+    STARTING BY ''
+    TERMINATED BY '\n'
+(cost);
+
+
+UPDATE vertices
+SET cost = NULL;
+
+
+LOAD DATA LOCAL INFILE './GraphE.csv' 
+INTO TABLE edges 
+FIELDS 
+    TERMINATED BY ',' 
+    OPTIONALLY ENCLOSED BY '"' 
+    ESCAPED BY ''
+LINES
+    STARTING BY ''
+    TERMINATED BY '\n'
+(src, dest, cost);
