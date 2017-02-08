@@ -96,7 +96,7 @@ function dijkstra($tmpVs, $tmpEs){
 
         // もうすでに$nowVに$nowTotalよりも小さいコストでたどり着けることが
         // わかっている場合は、この状態からの探索をやめる
-        if(!isset($tmpVs[$nowV]) && $tmpVs[$nowV] < $nowTotal) continue;
+        if(isset($tmpVs[$nowV]) && $tmpVs[$nowV] < $nowTotal) continue;
 
         // $nowVから出ている辺を全部みる
         foreach($tmpEs[$nowV] as $edge){
