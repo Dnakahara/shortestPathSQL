@@ -118,14 +118,22 @@ int main(int argc, char** argv)
 
     tmpVs = V;
     tmpEs = Es;
+    
+    auto duration = std::chrono::high_resolution_clock::now() - time_point;
+
+auto count = std::chrono::duration_cast<std::chrono::microseconds>(duration).count();
 
     ll ret = 0;
     auto startT = system_clock::now();
+    //auto startT = high_resolution_clock::now();
     ret = dfs(tmpVs, tmpEs);
     auto endT = system_clock::now();
+    //auto endT = high_resolustion_clock::now();
     auto t = duration_cast<milliseconds>(endT - startT).count();
+    //auto t = duration_cast<microseconds>(endT - startT).count();
     cout << "DFS   result:" << ret << " time:" << t << "ms" << endl;
-
+    //cout << "DFS   result:" << ret << " time:" << t << "μs" << endl;
+    
     tmpVs = V;
     tmpEs = Es;
 
